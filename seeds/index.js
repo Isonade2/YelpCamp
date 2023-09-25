@@ -26,6 +26,10 @@ seedDB = async () => {
     const camp = new Campground({
       location: `${cities[random1000].city}, ${cities[random1000].state}`,
       title: `${sample(descriptors)} ${sample(places)}`,
+      image: `https://source.unsplash.com/collection/483251`,
+      description:
+        "scientific yesterday send gently usually hair success list muscle choose few tree wonder wood giant sort eat stuck five real graph task busy both",
+      price: Math.floor(Math.random() * 20) + 10,
     });
     await camp.save();
   }

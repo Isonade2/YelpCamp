@@ -4,6 +4,7 @@ const mongoose = require("mongoose");
 const path = require("path");
 const Campground = require("./models/campground");
 const methodOverride = require("method-override");
+const ejsMate = require("ejs-mate");
 
 express.urlencoded({ extended: true });
 mongoose
@@ -16,7 +17,7 @@ mongoose
   });
 
 const db = mongoose.connection;
-
+app.engine("ejs", ejsMate);
 app.set("view engine", "ejs");
 app.set("views", path.join(__dirname, "views"));
 
@@ -55,8 +56,6 @@ app.get("/campgrounds/:id/edit", async (req, res) => {
 
 app.put("/campgrounds/:id", async (req, res) => {
   const { id } = req.params;
-  console.log(req.body);
-  console.log(req.params);
   const campground = await Campground.findByIdAndUpdate(id, {
     ...req.body.campground,
   });
