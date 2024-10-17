@@ -1,4 +1,22 @@
 const express = require("express");
+const mongoose = require("mongoose");
+
+mongoose
+  .connect("mongodb://localhost:27017/yelp-camp")
+  .then(() => {
+    console.log("Mongo connection open!");
+  })
+  .catch((err) => {
+    console.log("Mongo connection error!");
+    console.log(err);
+  });
+
+const db = mongoose.connection;
+db.on("error", console.error.bind(console, "connection error:"));
+db.once("open", () => {
+  console.log("Database connected");
+});
+
 const app = express();
 const path = require("path");
 
